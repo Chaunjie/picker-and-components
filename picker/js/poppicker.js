@@ -5,7 +5,6 @@
  */
 
 (function ($, window) {
-
     //创建 DOM
     $.dom = function (str) {
         if (typeof(str) !== 'string') {
