@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name = "format-detection" content="telephone = no" />
+    <title>Picker插件</title>
+    <link href="./css/picker.css" rel="stylesheet"/>
+    <style>
+        html,
+        body,
+        .content {
+            height: 0px;
+            margin: 0px;
+            background-color: #efeff4;
+        }
+        .content-padded{
+            padding:10px;
+        }
+        .title{
+            text-align: center;
+        }
+        #showCityPicker{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<header class="bar bar-nav">
+    <a class="action-back icon icon-left-nav pull-left"></a>
+    <h1 class="title">picker（选择器）</h1>
+</header>
+<div class="content">
+    <div class="content-padded">
+        <h5 class="content-padded">原生 SELECT</h5>
+        <select class="btn btn-block">
+            <option value="item-1">item-1</option>
+            <option value="item-2">item-2</option>
+            <option value="item-3">item-3</option>
+            <option value="item-4">item-4</option>
+            <option value="item-5">item-5</option>
+        </select>
+        <br/>
+        <p>原生 SELECT（选择框）在不同的设备上UI可能会有差异，并且不支持多级联动(多个 SELECT 可实现，但较麻烦)，故封装了picker组件，参见如下示例。</p>
+        <h5 class="content-padded">普通示例</h5>
+        <button id='showUserPicker' class="picker-btn picker-btn-block picker-btn-primary" type='button'>一级选择示例 ...</button>
+        <div id='userResult' class="ui-alert"></div>
+        <h5 class="content-padded">级联示例</h5>
+        <button id='showCityPicker' class="picker-btn picker-btn-block picker-btn-info" type='button'>二级联动示例 ...</button>
+        <div id='cityResult' class="ui-alert"></div>
+        <button id='showCityPicker3' class="picker-btn picker-btn-block picker-btn-warning" type='button'>三级联动示例 ...</button>
+        <div id='cityResult3' class="ui-alert"></div>
+    </div>
+</div>
+<script src="./js/jquery.js"></script>
+<script src="./js/picker.js"></script>
+<script src="./js/poppicker.js"></script>
+<script src="./js/city.data.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    (function ($, doc) {
+        $(doc).ready(function () {
+            //普通示例
+            var userPicker = new PopPicker();
+            userPicker.setData([{
+                value: 'ywj',
+                text: '董事长 叶文洁'
+            }, {
+                value: 'aaa',
+                text: '总经理 艾AA'
+            }, {
+                value: 'lj',
+                text: '罗辑'
+            }, {
+                value: 'ymt',
+                text: '云天明'
+            }, {
+                value: 'shq',
+                text: '史强'
+            }, {
+                value: 'zhbh',
+                text: '章北海'
+            }, {
+                value: 'zhy',
+                text: '庄颜'
+            }, {
+                value: 'gyf',
+                text: '关一帆'
+            }, {
+                value: 'zhz',
+                text: '智子'
+            }, {
+                value: 'gezh',
+                text: '歌者'
+            }]);
+
+            var showUserPickerButton = doc.getElementById('showUserPicker');
+            var userResult = doc.getElementById('userResult');
+            showUserPickerButton.addEventListener('click', function (event) {
+                userPicker.show(function (items) {
+                    userResult.innerText = JSON.stringify(items[0]);
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+            //-----------------------------------------
+            //二级联示例
+            var cityPicker = new PopPicker({
+                layer: 2
+            });
+            cityPicker.setData(cityData);
+            var showCityPickerButton = doc.getElementById('showCityPicker');
+            var cityResult = doc.getElementById('cityResult');
+            showCityPickerButton.addEventListener('click', function (event) {
+                cityPicker.show(function (items) {
+                    cityResult.innerText = "你选择的城市是:" + items[0].text + " " + items[1].text;
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+            //-----------------------------------------
+            //三级联示例
+            var cityPicker3 = new PopPicker({
+                layer: 3
+            });
+            cityPicker3.setData(cityData3);
+            var showCityPickerButton = doc.getElementById('showCityPicker3');
+            var cityResult3 = doc.getElementById('cityResult3');
+            showCityPickerButton.addEventListener('click', function (event) {
+                cityPicker3.show(function (items) {
+                    console.log(items);
+                    cityResult3.innerText = "你选择的城市是:" + (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+        });
+    })(jQuery, document);
+</script>
+</body>
+
+</html>

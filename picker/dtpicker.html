@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name = "format-detection" content="telephone = no" />
+    <title>DatePicker插件</title>
+    <link rel="stylesheet" type="text/css" href="./css/picker.css" />
+    <style>
+        html,
+        body,
+        .content {
+            height: 0px;
+            margin: 0px;
+            background-color: #efeff4;
+        }
+        .content-padded{
+            padding:10px;
+        }
+        .title{
+            text-align: center;
+        }
+        #demo4, #demo5{
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+
+<body>
+<header class="bar bar-nav">
+    <a class="action-back icon icon-left-nav pull-left"></a>
+    <h1 class="title">日期时间选择器</h1>
+</header>
+<div class="content">
+    <div class="content-padded">
+        <h5 class="content-padded">常规示例</h5>
+        <button id='demo1' data-options='{}' class="picker-btn picker-btn-block picker-btn-success">选择日期时间 ...</button>
+        <h5 class="content-padded">设定年份区间</h5>
+        <button id='demo2' data-options='{"type":"date","beginYear":2014,"endYear":2016}' class="picker-btn picker-btn-block picker-btn-primary">选择日期 ...</button>
+        <h5 class="content-padded">设定选中的时间</h5>
+        <button id='demo3' data-options='{"value":"2015-10-10 10:10","beginYear":2010,"endYear":2020}' class="picker-btn picker-btn-block picker-btn-info">选择日期时间 ...</button>
+        <h5 class="content-padded">指定类型</h5>
+        <button id='demo4' data-options='{"type":"date"}' class="picker-btn picker-btn-block picker-btn-warning">选择日期 ...</button>
+        <button id='demo5' data-options='{"type":"time"}' class="picker-btn picker-btn-block picker-btn-warning">选择时间 ...</button>
+        <button id='demo6' data-options='{"type":"month"}' class="picker-btn picker-btn-block picker-btn-warning">选择月份 ...</button>
+        <h5 class="content-padded">自定义数据</h5>
+        <button id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}' class="picker-btn picker-btn-block picker-btn-warning">选择时段 ...</button>
+        <div id='result' class="ui-alert"></div>
+    </div>
+</div>
+<script src="./js/jquery.js"></script>
+<script src="./js/picker.js"></script>
+<script src="./js/datePicker.js"></script>
+<script>
+    (function($) {
+        var result = $('#result')[0];
+        var btns = $('.picker-btn');
+        btns.each(function(i, btn) {
+            btn.addEventListener('click', function() {
+                var optionsJson = this.getAttribute('data-options') || '{}';
+                var options = JSON.parse(optionsJson);
+                var id = this.getAttribute('id');
+                var picker = new DatePicker(options);
+                picker.show(function(rs) {
+                    //result.innerText = '选择结果: ' + rs.text;
+                    alert('选择结果: ' + rs.text);
+                    picker.dispose();
+                });
+            }, false);
+        });
+    })(jQuery);
+</script>
+</body>
+
+</html>

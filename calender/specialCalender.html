@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./calender.css" />
+		<style>
+			html, body {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="calender-container"></div>
+		</div>
+	</body>
+	<script src="./calender.js"></script>
+	<script type="text/javascript">
+		var test = new calender({
+			wrap : '.calender-container',
+			afterClick : function(res) {
+				alert(JSON.stringify(res));
+			}
+		});
+	</script>
+</html>
