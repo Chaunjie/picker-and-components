@@ -6,7 +6,7 @@ https://chaunjie.github.io/picker-and-components/picker/dtpicker.html
 
 Introduction
 ======================
-Transition effect of some CSS3 pages cool, you can also customize their Transition effect.
+Picker
 
 How to use this library.
 =======================
